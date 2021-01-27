@@ -13,7 +13,6 @@ class MainNavigationController: UINavigationController {
         view.backgroundColor = .white
         
         if isLoggedIn() {
-            //assume user is logged in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let tabbarVC = storyboard.instantiateViewController(withIdentifier: "TabbarIdentifier") as! TabBarController
             let userData = UserDefaults.standard.getUserData()

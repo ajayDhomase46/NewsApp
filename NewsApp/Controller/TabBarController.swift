@@ -6,45 +6,45 @@
 //
 
 import UIKit
-import GoogleSignIn
+import SideMenu
 
-class TabBarController: UITabBarController {
+class TabBarController: UITabBarController, MenuControllerDelegate {
 
     var imgURL: URL?
     var userName: String?
+    var menu: SideMenuNavigationController?
     
+    lazy var menuBarbuttonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(menuBarButtonTapped))
+    
+    @objc
+    func menuBarButtonTapped() {
+        present(menu!, animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        let containView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        let imageview = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        if let url = imgURL{
-            imageview.kf.setImage(with: url)
-        } else {
-            imageview.image = UIImage(systemName: "person.crop.circle")
-        }
-        imageview.contentMode = UIView.ContentMode.scaleAspectFit
-        imageview.layer.cornerRadius = 20
-        imageview.layer.masksToBounds = true
-        containView.addSubview(imageview)
-        let rightBarButton = UIBarButtonItem(customView: containView)
-        navigationItem.rightBarButtonItem = rightBarButton
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(handleSignOut))
-        if let name = userName{
-            navigationItem.title = name
-        } else {
-            navigationItem.title = "Welcome back!"
-        }
-        
+        self.setUpTabBarUI()
     }
     
+    fileprivate func setUpTabBarUI(){
+        navigationItem.setLeftBarButton(menuBarbuttonItem, animated: false)
+        let vc = storyboard?.instantiateViewController(withIdentifier: "menuViewController") as? MenuViewController
+        vc?.imgURL = imgURL
+        vc?.userName = userName
+        vc?.delegate = self
+        menu = SideMenuNavigationController(rootViewController: vc!)
+        menu?.leftSide = true
+        menu?.setNavigationBarHidden(true, animated: false)
+        SideMenuManager.default.leftMenuNavigationController = menu
+        SideMenuManager.default.addPanGestureToPresent(toView: self.view)
+    }
     
-    @objc func handleSignOut() {
-        UserDefaults.standard.setIsLoggedIn(value: false)
-        UserDefaults.standard.setUserData(nil, nil)
-        UserDefaults.standard.synchronize()
-        GIDSignIn.sharedInstance()?.signOut()
-        let loginController = LoginViewController()
-        loginController.modalPresentationStyle = .fullScreen
-        present(loginController, animated: true, completion: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.title = "News App"
+    }
+    
+    func switchTabBar(_ index: Int) {
+        dismiss(animated: true) {
+            self.selectedIndex = index
+        }
     }
 }

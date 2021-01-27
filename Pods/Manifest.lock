@@ -17,14 +17,16 @@ PODS:
   - GTMSessionFetcher/Core (1.5.0)
   - GTMSessionFetcher/Full (1.5.0):
     - GTMSessionFetcher/Core (= 1.5.0)
+  - iOSDropDown (0.3.4)
   - Kingfisher (6.0.1)
-  - ObjectMapper (4.2.0)
+  - SideMenu (6.5.0)
 
 DEPENDENCIES:
   - Alamofire
   - GoogleSignIn
+  - iOSDropDown
   - Kingfisher
-  - ObjectMapper
+  - SideMenu
 
 SPEC REPOS:
   trunk:
@@ -33,8 +35,9 @@ SPEC REPOS:
     - GoogleSignIn
     - GTMAppAuth
     - GTMSessionFetcher
+    - iOSDropDown
     - Kingfisher
-    - ObjectMapper
+    - SideMenu
 
 SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
@@ -42,9 +45,10 @@ SPEC CHECKSUMS:
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
+  iOSDropDown: c10a761f9a00c3f1cc9d3bce43ae504628e2f692
   Kingfisher: adde87a4f74f6a3845395769354efff593581740
-  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
 
-PODFILE CHECKSUM: 08fd95a4620e3a20cb4dc953bf3b41f71588284c
+PODFILE CHECKSUM: 1cea425385e41d677cc024a1e509723ef6d9e2a5
 
 COCOAPODS: 1.10.1

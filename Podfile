@@ -7,8 +7,8 @@ target 'NewsApp' do
 
   # Pods for NewsApp
 pod 'Alamofire'
-pod 'ObjectMapper'
 pod 'Kingfisher'
 pod 'GoogleSignIn'
-
+pod 'iOSDropDown'
+pod 'SideMenu'
 end
